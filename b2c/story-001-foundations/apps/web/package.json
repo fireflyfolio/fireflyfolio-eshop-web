@@ -1,0 +1,24 @@
+{
+  "name": "eshop-web",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "check:updates": "npx npm-check-updates -u && npm i"
+  },
+  "dependencies": {
+    "next": "16.0.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "4.1.16",
+    "postcss": "8.5.6",
+    "autoprefixer": "10.4.21",
+    "typescript": "5.9.3",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@types/node": "24.9.1"
+  }
+}

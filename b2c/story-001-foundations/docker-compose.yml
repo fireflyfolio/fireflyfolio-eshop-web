@@ -1,0 +1,60 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: eshop
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  api:
+    build: ./apps/api
+    env_file: .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      API_PORT: ${API_PORT}
+    depends_on:
+      - postgres
+    ports:
+      - "${API_PORT}:3001"
+
+
+  admin:
+    build: ./apps/admin
+    env_file: .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      REDIS_URL: ${REDIS_URL}
+      ADMIN_LOGIN: ${ADMIN_LOGIN}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      ADMIN_PORT: ${ADMIN_PORT}
+    depends_on:
+      - postgres
+      - redis
+    ports:
+     - "${ADMIN_PORT}:3002"
+
+  web:
+    build: ./apps/web
+    env_file: .env
+    environment:
+      NEXT_PUBLIC_API_URL: http://api:${API_PORT}
+      WEB_PORT: ${WEB_PORT}
+    depends_on:
+      - api
+    ports:
+      - "${WEB_PORT}:3000"
+
+volumes:
+  pgdata:
