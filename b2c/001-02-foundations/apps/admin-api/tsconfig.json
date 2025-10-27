@@ -1,22 +1,17 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "target": "ES2021",
-    "outDir": "dist",
-    "sourceMap": true,
-    "strict": true,
+    "declaration": false,
+    "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "dist",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "types": [
-      "node",
-      "jest"
-    ]
+    "strict": true,
+    "types": ["jest", "node"],
   },
-  "include": [
-    "src/**/*",
-    "tests/**/*"
-  ]
+  "include": ["src/**/*.ts", "tests/**/*.ts"]
 }

@@ -19,4 +19,5 @@ async function bootstrap() {
   await app.listen(port);
   logger.log(`Running on :${port} - Swagger /docs`);
 }
+
 bootstrap();
