@@ -50,7 +50,7 @@ services:
     build: ./apps/web-frontend
     env_file: .env
     environment:
-      INTERNAL_WEB_API_URL: http://web-api:13001
+      INTERNAL_WEB_API_URL: http://web-api:3001
     ports:
       - "13000:3000"
     networks: [frontend]

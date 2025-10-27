@@ -1,5 +1,5 @@
 export default async function Home() {
-  const base = process.env.INTERNAL_WEB_API_URL || 'http://web-api:3000';
+  const base = process.env.INTERNAL_WEB_API_URL || 'http://web-api:3001';
   const res = await fetch(`${base}/status`, { cache: 'no-store' });
   const data = await res.text();
   return (
