@@ -1,18 +1,16 @@
-FROM node:20-alpine AS base
+# Build stage
+FROM node:20-alpine AS build
 WORKDIR /app
-
-# Dependencies
 COPY package.json package-lock.json* ./
 RUN npm ci
+COPY . .
+RUN npm run build
 
-# Sources
-COPY tsconfig.json nest-cli.json ./
-COPY src ./src
-COPY prisma ./prisma
 
-# Build & Prisma
-RUN npm run build && npm run prisma:generate
-
-EXPOSE 3002
+# Run stage
+FROM node:20-alpine AS runner
+WORKDIR /app
 ENV NODE_ENV=production
-CMD sh -c "npm run prisma:migrate && node -r dotenv/config dist/main.js"
+COPY --from=build /app/.output ./.output
+EXPOSE 3000
+CMD ["node", ".output/server/index.mjs"]
