@@ -40,9 +40,9 @@ services:
     env_file: .env
     environment:
       DATABASE_URL: ${DATABASE_URL}
-      WEB_API_PORT: ${WEB_API_PORT}
+      WEB_API_PORT: 3001
     ports:
-      - "${WEB_API_PORT}:3001"
+      - "13001:3001"
     restart: always
     networks: [backend, frontend]
 
@@ -50,9 +50,9 @@ services:
     build: ./apps/web-frontend
     env_file: .env
     environment:
-      INTERNAL_WEB_API_URL: http://web-api:3000
+      INTERNAL_WEB_API_URL: http://web-api:13001
     ports:
-      - "${WEB_FRONTEND_PORT}:3000"
+      - "13000:3000"
     networks: [frontend]
 
   admin-api:
@@ -60,19 +60,19 @@ services:
     env_file: .env
     environment:
       DATABASE_URL: ${DATABASE_URL}
-      ADMIN_API_PORT: ${ADMIN_API_PORT}
+      ADMIN_API_PORT: 3001
       REDIS_URL: ${REDIS_URL}
     ports:
-      - "${ADMIN_API_PORT}:3001"
+      - "14001:3001"
     networks: [backend, frontend]
 
   admin-frontend:
     build: ./apps/admin-frontend
     env_file: .env
     environment:
-      INTERNAL_ADMIN_API_URL: http://admin-api:3000
+      INTERNAL_ADMIN_API_URL: http://admin-api:14001
     ports:
-      - "${ADMIN_FRONTEND_PORT}:3000"
+      - "14000:3000"
     networks: [frontend]
 
 networks:
