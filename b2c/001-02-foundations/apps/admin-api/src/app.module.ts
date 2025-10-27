@@ -8,7 +8,7 @@ import { StatusController } from './status.controller';
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        ADMIN_API_PORT: Joi.number().default(3000)
+        ADMIN_API_PORT: Joi.number().default(3001)
       })
     })
   ],

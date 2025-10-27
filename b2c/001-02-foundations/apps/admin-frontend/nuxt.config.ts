@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     // Environnements à l’exécution (serveur uniquement)
-    INTERNAL_ADMIN_API_URL: process.env.INTERNAL_ADMIN_API_URL || 'http://admin-api:3000'
+    INTERNAL_ADMIN_API_URL: process.env.INTERNAL_ADMIN_API_URL || 'http://admin-api:3001'
   },
 
   compatibilityDate: '2025-10-27'

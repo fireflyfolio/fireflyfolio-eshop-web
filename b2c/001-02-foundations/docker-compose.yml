@@ -70,7 +70,7 @@ services:
     build: ./apps/admin-frontend
     env_file: .env
     environment:
-      INTERNAL_ADMIN_API_URL: http://admin-api:14001
+      INTERNAL_ADMIN_API_URL: http://admin-api:3001
     ports:
       - "14000:3000"
     networks: [frontend]

@@ -11,7 +11,6 @@ Monorepo minimal avec **4 applications** et **infrastructure** prête à l’emp
 - **Infra** : **PostgreSQL**, **pgAdmin**, **Redis**
 - **Docker Compose** : orchestrations des 4 apps + services d’infra
 
----
 
 ## Architecture & Dossiers
 
@@ -23,46 +22,42 @@ Monorepo minimal avec **4 applications** et **infrastructure** prête à l’emp
 
 Frontends consomment leurs APIs via des **variables d’environnement** d’URL interne (noms de services Docker).
 
----
 
 ## Ports (hôte)
 
-- Web Frontend : **http://localhost:6000**
-- Web API : **http://localhost:6001** (routes `/status`, `/docs`)
-- Admin Frontend : **http://localhost:7000**
-- Admin API : **http://localhost:7001** (routes `/status`, `/docs`)
+- Web Frontend : **http://localhost:13000**
+- Web API : **http://localhost:13001** (routes `/status`, `/docs`)
+- Admin Frontend : **http://localhost:14000**
+- Admin API : **http://localhost:14001** (routes `/status`, `/docs`)
 - pgAdmin : **http://localhost:5050**
 
 > Les apps écoutent en **interne** sur `3000` et sont mappées vers les ports hôte ci-dessus.
 
----
 
 ## Variables d’environnement (extrait)
 
-- **Ports** : `WEB_FRONTEND_PORT=6000`, `WEB_API_PORT=6001`, `ADMIN_FRONTEND_PORT=7000`, `ADMIN_API_PORT=7001`
+- **Ports** : `WEB_FRONTEND_PORT=13000`, `WEB_API_PORT=13001`, `ADMIN_FRONTEND_PORT=14000`, `ADMIN_API_PORT=14001`
 - **Base de données** : `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`, `DATABASE_URL`
 - **Redis** : `REDIS_URL`
 - **pgAdmin** : `PGADMIN_DEFAULT_EMAIL`, `PGADMIN_DEFAULT_PASSWORD`, `PGADMIN_PORT`
 - **Frontends (URLs internes vers APIs)** :
-  - Next (Web) : `INTERNAL_WEB_API_URL` → `http://web-api:3000` (Docker)
-  - Nuxt (Admin) : `INTERNAL_ADMIN_API_URL` → `http://admin-api:3000` (Docker)
+  - Next (Web) : `INTERNAL_WEB_API_URL` → `http://web-api:3001` (Docker)
+  - Nuxt (Admin) : `INTERNAL_ADMIN_API_URL` → `http://admin-api:3001` (Docker)
 
-> Hors Docker (développement local), définir les URLs internes vers `http://localhost:6001` (Web) et `http://localhost:7001` (Admin).
+> Hors Docker (développement local), définir les URLs internes vers `http://localhost:13001` (Web) et `http://localhost:14001` (Admin).
 
----
 
 ## Démarrage
 
 1) Copier l’exemple d’env en `.env` (racine).  
 2) Lancer les services avec Docker Compose (build + up).  
 3) Vérifier les 4 endpoints principaux :
-   - Web Frontend (6000) → affiche la réponse de Web API
-   - Web API (6001) → `/status` + Swagger `/docs`
-   - Admin Frontend (7000) → affiche la réponse de Admin API
-   - Admin API (7001) → `/status` + Swagger `/docs`
+   - Web Frontend (13000) → affiche la réponse de Web API
+   - Web API (13001) → `/status` + Swagger `/docs`
+   - Admin Frontend (14000) → affiche la réponse de Admin API
+   - Admin API (14001) → `/status` + Swagger `/docs`
    - pgAdmin (5050) → se connecter avec les identifiants de `.env`
 
----
 
 ## Tests (MVP)
 
@@ -74,7 +69,6 @@ Frontends consomment leurs APIs via des **variables d’environnement** d’URL 
 
 > Les tests e2e des APIs utilisent une instance Nest en mémoire (Supertest sur `app.getHttpServer()`), sans dépendre des conteneurs.
 
----
 
 ## Logs & Observabilité
 
@@ -85,7 +79,6 @@ Frontends consomment leurs APIs via des **variables d’environnement** d’URL 
   - endpoints `/healthz` / `/readyz`
   - `depends_on` avec **healthchecks HTTP** pour APIs
 
----
 
 ## Sécurité & Qualité (base)
 
@@ -94,7 +87,6 @@ Frontends consomment leurs APIs via des **variables d’environnement** d’URL 
 - **Env** : validation avec `@nestjs/config` + `Joi` (APIs).
 - **CI (proposée)** : lint, build, tests (unit/int/e2e), audit de vulnérabilités.
 
----
 
 ## Prochaines étapes
 
