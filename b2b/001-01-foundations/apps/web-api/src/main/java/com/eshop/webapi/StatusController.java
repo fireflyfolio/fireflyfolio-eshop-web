@@ -18,9 +18,14 @@ public class StatusController {
 
   @GetMapping("/status")
   public ResponseEntity<String> status() {
-    Long hits = redis.opsForValue().increment("web_api_status_hits", 1);
-    jdbc.update("insert into ping_log(service) values (?)", "web-api");
-    log.info("Status hit (web-api), total={}", hits);
+    try {
+      Long hits = redis.opsForValue().increment("web_api_status_hits", 1);
+      jdbc.update("insert into ping_log(service) values (?)", "web-api");
+      log.info("Status hit (web-api), total={}", hits);
+    } catch (Exception e) {
+      log.warn("Redis unavailable: {}", e.getMessage());
+    }
+
     return ResponseEntity.ok("Hello dear vendor");
   }
 }
