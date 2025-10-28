@@ -1,7 +1,41 @@
 services:
+  web-api:
+    build: ./apps/web-api
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      WEB_API_PORT: 3001
+    ports:
+      - "13001:3001"
+    networks: [eshop-net]
+
+  web-frontend:
+    build: ./apps/web-frontend
+    environment:
+      INTERNAL_WEB_API_URL: http://web-api:3001
+    ports:
+      - "13000:3000"
+    networks: [eshop-net]
+
+  admin-api:
+    build: ./apps/admin-api
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      ADMIN_API_PORT: 3001
+      REDIS_URL: ${REDIS_URL}
+    ports:
+      - "14001:3001"
+    networks: [eshop-net]
+
+  admin-frontend:
+    build: ./apps/admin-frontend
+    environment:
+      INTERNAL_ADMIN_API_URL: http://admin-api:3001
+    ports:
+      - "14000:3000"
+    networks: [eshop-net]
+
   postgres:
     image: postgres:16
-    env_file: .env
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -10,17 +44,10 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-    restart: always
-    networks: [backend]
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
-      interval: 5s
-      timeout: 3s
-      retries: 20
+    networks: [eshop-net]
 
   pgadmin:
     image: dpage/pgadmin4:8
-    env_file: .env
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
@@ -28,56 +55,15 @@ services:
       - "${PGADMIN_PORT}:80"
     volumes:
       - pgadmin:/var/lib/pgadmin
-    restart: always
-    networks: [backend]
+    networks: [eshop-net]
 
   redis:
     image: redis:7-alpine
     ports: ["6379:6379"]
-
-  web-api:
-    build: ./apps/web-api
-    env_file: .env
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
-      WEB_API_PORT: 3001
-    ports:
-      - "13001:3001"
-    restart: always
-    networks: [backend, frontend]
-
-  web-frontend:
-    build: ./apps/web-frontend
-    env_file: .env
-    environment:
-      INTERNAL_WEB_API_URL: http://web-api:3001
-    ports:
-      - "13000:3000"
-    networks: [frontend]
-
-  admin-api:
-    build: ./apps/admin-api
-    env_file: .env
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
-      ADMIN_API_PORT: 3001
-      REDIS_URL: ${REDIS_URL}
-    ports:
-      - "14001:3001"
-    networks: [backend, frontend]
-
-  admin-frontend:
-    build: ./apps/admin-frontend
-    env_file: .env
-    environment:
-      INTERNAL_ADMIN_API_URL: http://admin-api:3001
-    ports:
-      - "14000:3000"
-    networks: [frontend]
+    networks: [eshop-net]
 
 networks:
-  frontend:
-  backend:
+  eshop-net:
 
 volumes:
   pgdata:
