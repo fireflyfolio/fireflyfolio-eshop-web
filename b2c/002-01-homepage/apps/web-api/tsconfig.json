@@ -1,17 +1,36 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ES2022",
+    "target": "ES2022",
     "declaration": false,
     "removeComments": true,
+    "moduleResolution": "Node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "target": "ES2021",
     "sourceMap": true,
     "outDir": "dist",
     "esModuleInterop": true,
     "strict": true,
-    "types": ["jest", "node"],
+    "types": [
+      "jest",
+      "node"
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@domain/*": [
+        "domain/*"
+      ],
+      "@app/*": [
+        "application/*"
+      ],
+      "@infra/*": [
+        "infrastructure/*"
+      ]
+    }
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts"]
+  "include": [
+    "src/**/*.ts",
+    "tests/**/*.ts"
+  ]
 }

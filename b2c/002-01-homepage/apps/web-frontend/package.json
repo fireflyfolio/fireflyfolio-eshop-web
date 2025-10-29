@@ -1,5 +1,5 @@
 {
-  "name": "eshop-web",
+  "name": "eshop-web-frontend",
   "private": true,
   "scripts": {
     "dev": "next dev",
