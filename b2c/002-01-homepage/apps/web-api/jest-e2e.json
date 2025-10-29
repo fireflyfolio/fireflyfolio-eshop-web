@@ -1,0 +1,10 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "rootDir": "../",
+  "testMatch": ["<rootDir>/tests/e2e/**/*.e2e-spec.ts"],
+  "moduleFileExtensions": ["ts", "js", "json"],
+  "transform": { "^.+\\.[tT]s$": ["ts-jest", { "tsconfig": "tsconfig.spec.json" }] },
+  "testPathIgnorePatterns": ["/node_modules/", "/dist/"],
+  "cacheDirectory": ".jest-cache-e2e"
+}

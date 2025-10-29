@@ -1,0 +1,18 @@
+FROM node:20-alpine AS base
+WORKDIR /app
+
+# Dependencies
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+# Sources
+COPY tsconfig.json nest-cli.json ./
+COPY src ./src
+COPY prisma ./prisma
+
+# Build & Prisma
+RUN npm run build && npm run prisma:generate
+
+EXPOSE 3001
+ENV NODE_ENV=production
+CMD sh -c "npm run prisma:migrate && node dist/main.js"
