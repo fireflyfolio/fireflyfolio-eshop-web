@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+# URL interne de la web-api (définie par env WEB_API_URL en Docker)
+app:
+  webApiUrl: ${WEB_API_URL:http://localhost:8080}
+
+logging:
+  level:
+    root: INFO
+    com.eshop.webfrontend: INFO

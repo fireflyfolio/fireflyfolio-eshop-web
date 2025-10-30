@@ -1,18 +1,18 @@
-// test/e2e/app.e2e-spec.ts
 import { INestApplication } from '@nestjs/common';
-import { Test } from '@nestjs/testing';
+import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
+import { App } from 'supertest/types';
 import { AppModule } from '../../src/app.module';
 
-describe('Web API e2e', () => {
-  let app: INestApplication;
+describe('AppController (e2e)', () => {
+  let app: INestApplication<App>;
 
   beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
+    const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
 
-    app = moduleRef.createNestApplication();
+    app = moduleFixture.createNestApplication();
     await app.init();
   });
 
@@ -20,9 +20,11 @@ describe('Web API e2e', () => {
     await app.close();
   });
 
-  it('GET /status → "Hello dear customer"', async () => {
-    const res = await request(app.getHttpServer()).get('/status');
-    expect(res.status).toBe(200);
-    expect(res.text).toBe('Hello dear customer');
+  it('GET /status → "Hello dear customer"', () => {
+    return request(app.getHttpServer())
+      .get('/status')
+      .expect(200)
+      .expect('Hello dear customer';
   });
 });
+

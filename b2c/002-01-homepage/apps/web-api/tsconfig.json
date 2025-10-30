@@ -1,36 +1,25 @@
 {
   "compilerOptions": {
-    "module": "ES2022",
-    "target": "ES2022",
-    "declaration": false,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolvePackageJsonExports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": true,
     "removeComments": true,
-    "moduleResolution": "Node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2023",
     "sourceMap": true,
-    "outDir": "dist",
-    "esModuleInterop": true,
-    "strict": true,
-    "types": [
-      "jest",
-      "node"
-    ],
-    "baseUrl": "src",
-    "paths": {
-      "@domain/*": [
-        "domain/*"
-      ],
-      "@app/*": [
-        "application/*"
-      ],
-      "@infra/*": [
-        "infrastructure/*"
-      ]
-    }
-  },
-  "include": [
-    "src/**/*.ts",
-    "tests/**/*.ts"
-  ]
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false
+  }
 }

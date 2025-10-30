@@ -1,4 +1,4 @@
-import { Category, StaticPage, StaticSlug } from '@domain/types';
+import { Category, StaticPage, StaticSlug } from '../../domain/types.js';
 
 export interface CategoryRepository {
   list(): Category[];

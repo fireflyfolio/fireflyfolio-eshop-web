@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
-import { ListCategoriesUseCase } from '@app/usecases/ListCategories.js';
+
+import { ListCategoriesUseCase } from '../../../application/usecases/ListCategories.js';
 
 @Controller('categories')
 export class CategoriesController {

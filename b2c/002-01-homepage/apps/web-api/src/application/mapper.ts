@@ -1,4 +1,4 @@
-import { Product, Locale, StaticPage } from '@domain/types.js';
+import { Product, Locale, StaticPage } from '../domain/types.js';
 
 export const priceToNumber = (cents: number) => Math.round(cents) / 100;
 export function localizeTitle(p: Product, locale: Locale) { return { ...p, title: p.title[locale] ?? p.title.fr } as any; }

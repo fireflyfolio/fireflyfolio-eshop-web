@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { ProductRepository, ListParams } from '@app/ports/ProductRepository.js';
-import { TOKENS } from '@infra/tokens.js';
+
+import type { ProductRepository, ListParams } from '../ports/ProductRepository.js';
+import { TOKENS } from '../../infrastructure/tokens.js';
 
 @Injectable()
 export class ListProductsUseCase {

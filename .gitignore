@@ -4,6 +4,7 @@
 logs
 *.log
 npm-debug.log*
+pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
@@ -20,12 +21,6 @@ lib-cov
 .nyc_output
 .grunt
 .lock-wscript
-
-# -----------------------------
-# Coverage
-# -----------------------------
-coverage
-*.lcov
 
 # -----------------------------
 # Package managers & caches
@@ -123,7 +118,11 @@ bin/
 # -----------------------------
 # Editors & tooling
 # -----------------------------
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 .vscode-test
 .idea/
 *.iml
@@ -147,6 +146,9 @@ cypress/downloads/
 playwright-report/
 test-results/
 storybook-static/
+/.nyc_output
+coverage
+*.lcov
 
 # -----------------------------
 # Java (Maven/Gradle/General)
@@ -158,7 +160,20 @@ storybook-static/
 *.ear
 *.hp*
 
-target/
-build/
-# Eclipse
+# compiled output
+/dist
+/node_modules
+/build
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
 .settings/
+*.sublime-workspace
+
+# temp directory
+.temp
+.tmp
