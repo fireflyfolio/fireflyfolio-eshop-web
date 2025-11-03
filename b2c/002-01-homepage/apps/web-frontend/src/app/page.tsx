@@ -1,14 +1,27 @@
-export default async function Home() {
-  const base = process.env.INTERNAL_WEB_API_URL || 'http://web-api:3001';
-  const res = await fetch(`${base}/status`, { cache: 'no-store' });
-  const data = await res.text();
+import { Carousel } from '../ui/Carousel';
+
+async function getCategories() {
+  const res = await fetch(`${process.env.PUBLIC_WEB_API_URL}/categories`, { next: { revalidate: 60 } });
+  return res.json() as Promise<Array<{ slug: string; name: { fr: string; en: string }; imageUrl: string }>>;
+}
+
+export default async function HomePage() {
+  const cats = await getCategories();
+  const slides = cats.map(c => ({ image: c.imageUrl, href: `/catalog?category=${c.slug}`, alt: c.name.fr }));
   return (
-    <main className="min-h-screen grid place-items-center">
-      <div className="p-6 rounded-xl shadow bg-white">
-        <h1 className="text-2xl font-bold">B2C Frontend</h1>
-        <p className="mt-2 text-gray-600">API says:</p>
-        <p className="mt-4 font-mono">{data}</p>
-      </div>
-    </main>
+    <div>
+      <Carousel slides={slides} />
+      <section className="mx-auto max-w-7xl px-4 py-8">
+        <h2 className="text-xl font-semibold mb-4">Catégories</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {cats.map(c => (
+            <a key={c.slug} href={`/catalogue?category=${c.slug}`} className="border rounded-lg overflow-hidden">
+              <img src={c.imageUrl} alt={c.name.fr} className="w-full aspect-[4/3] object-cover" />
+              <div className="p-3">{c.name.fr}</div>
+            </a>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }

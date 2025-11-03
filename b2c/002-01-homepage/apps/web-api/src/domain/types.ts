@@ -19,7 +19,7 @@ export interface Product {
   tags?: string[];
 }
 
-export type StaticSlug = 'gcu' | 'privacy' | 'cookie' | 'about';
+export type StaticSlug = 'terms' | 'privacy' | 'cookies' | 'about';
 export interface StaticPage {
   slug: StaticSlug;
   title: Record<Locale, string>;

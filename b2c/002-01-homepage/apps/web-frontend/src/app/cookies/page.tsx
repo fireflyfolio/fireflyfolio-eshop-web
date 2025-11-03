@@ -1,9 +1,9 @@
 async function getPage() {
-  const r = await fetch(`${process.env.PUBLIC_WEB_API_URL}/pages/cookie`, { next: { revalidate: 3600 } });
+  const r = await fetch(`${process.env.PUBLIC_WEB_API_URL}/pages/privacy`, { next: { revalidate: 3600 } });
   return r.json();
 }
 
-export default async function Cookie() {
+export default async function Privacy() {
   const page = await getPage();
 
   return (

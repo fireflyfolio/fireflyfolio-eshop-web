@@ -3,10 +3,10 @@ import { ProductRepository, ListParams } from '../../../application/ports/Produc
 import { CategoryRepository } from '../../../application/ports/CategoryRepository';
 
 const categories: Category[] = [
-  { id: 'cat-books', slug: 'livres', name: { fr: 'Livres', en: 'Books' }, imageUrl: 'https://picsum.photos/seed/books/1200/600' },
-  { id: 'cat-games', slug: 'jeux-videos', name: { fr: 'Jeux vidéo', en: 'Video Games' }, imageUrl: 'https://picsum.photos/seed/games/1200/600' },
-  { id: 'cat-music', slug: 'musiques', name: { fr: 'Musiques', en: 'Music' }, imageUrl: 'https://picsum.photos/seed/music/1200/600' },
-  { id: 'cat-videos', slug: 'videos', name: { fr: 'Vidéos', en: 'Videos' }, imageUrl: 'https://picsum.photos/seed/videos/1200/600' }
+  { id: 'cat-books',  slug: 'books',        name: { fr: 'Livres',      en: 'Books' },       imageUrl: 'https://picsum.photos/seed/books/1200/600' },
+  { id: 'cat-games',  slug: 'video-games',  name: { fr: 'Jeux vidéo',  en: 'Video Games' }, imageUrl: 'https://picsum.photos/seed/games/1200/600' },
+  { id: 'cat-music',  slug: 'music',        name: { fr: 'Musiques',    en: 'Music' },       imageUrl: 'https://picsum.photos/seed/music/1200/600' },
+  { id: 'cat-videos', slug: 'videos',       name: { fr: 'Vidéos',      en: 'Videos' },      imageUrl: 'https://picsum.photos/seed/videos/1200/600' },
 ];
 
 const products: Product[] = Array.from({ length: 32 }).map((_, i) => {
@@ -29,9 +29,9 @@ const products: Product[] = Array.from({ length: 32 }).map((_, i) => {
 });
 
 const staticPages: StaticPage[] = [
-  { slug: 'gcu', title: { fr: "Conditions d'utilisation et de vente", en: 'Conditions of Use & Sale' }, html: { fr: '<p>Texte CGU (exemple).</p>', en: '<p>Terms (sample).</p>' } },
+  { slug: 'terms', title: { fr: "Conditions d'utilisation et de vente", en: 'Conditions of Use & Sale' }, html: { fr: '<p>Texte CGU (exemple).</p>', en: '<p>Terms (sample).</p>' } },
   { slug: 'privacy', title: { fr: 'Confidentialité', en: 'Privacy Notice' }, html: { fr: '<p>Politique de confidentialité.</p>', en: '<p>Privacy policy.</p>' } },
-  { slug: 'cookie', title: { fr: 'Cookies', en: 'Cookies Notice' }, html: { fr: '<p>Politique cookies.</p>', en: '<p>Cookies policy.</p>' } },
+  { slug: 'cookies', title: { fr: 'Cookies', en: 'Cookies Notice' }, html: { fr: '<p>Politique cookies.</p>', en: '<p>Cookies policy.</p>' } },
   { slug: 'about', title: { fr: 'À propos', en: 'About' }, html: { fr: '<p>À propos de eShop.</p>', en: '<p>About eShop.</p>' } }
 ];
 

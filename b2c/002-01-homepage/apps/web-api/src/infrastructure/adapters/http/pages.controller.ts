@@ -8,7 +8,7 @@ export class PagesController {
   constructor(private readonly cats: InMemoryCategoryRepository) { }
 
   @Get(':slug')
-  get(@Param('slug') slug: 'cgu' | 'privacy' | 'cookie' | 'about') {
+  get(@Param('slug') slug: 'cgu' | 'privacy' | 'cookies' | 'about') {
     const page = this.cats.pageBySlug(slug);
     if (!page) throw new NotFoundException('not_found');
     return page;
