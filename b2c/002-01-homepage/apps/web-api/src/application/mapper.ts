@@ -1,4 +1,4 @@
-import { Product, Locale, StaticPage } from '../domain/types.js';
+import { Product, Locale, StaticPage } from '../domain/types';
 
 export const priceToNumber = (cents: number) => Math.round(cents) / 100;
 

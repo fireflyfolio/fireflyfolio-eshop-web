@@ -1,6 +1,6 @@
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 
-import { InMemoryCategoryRepository } from '../persistence/inMemory.repository.js';
+import { InMemoryCategoryRepository } from '../persistence/inMemory.repository';
 
 @Controller('pages')
 export class PagesController {

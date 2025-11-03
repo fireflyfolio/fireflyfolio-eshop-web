@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { ListProductsUseCase } from '../../../application/usecases/ListProducts.js';
-import { GetProductUseCase } from '../../../application/usecases/GetProduct.js';
-import { ListProductsQuery } from './dto/list-products.query.js';
+import { ListProductsUseCase } from '../../../application/usecases/ListProducts';
+import { GetProductUseCase } from '../../../application/usecases/GetProduct';
+import { ListProductsQuery } from './dto/list-products.query';
 
 @Controller('products')
 export class ProductsController {

@@ -1,6 +1,6 @@
-import { Category, Product, StaticPage } from '../../../domain/types.js';
-import { ProductRepository, ListParams } from '../../../application/ports/ProductRepository.js';
-import { CategoryRepository } from '../../../application/ports/CategoryRepository.js';
+import { Category, Product, StaticPage } from '../../../domain/types';
+import { ProductRepository, ListParams } from '../../../application/ports/ProductRepository';
+import { CategoryRepository } from '../../../application/ports/CategoryRepository';
 
 const categories: Category[] = [
   { id: 'cat-books', slug: 'livres', name: { fr: 'Livres', en: 'Books' }, imageUrl: 'https://picsum.photos/seed/books/1200/600' },

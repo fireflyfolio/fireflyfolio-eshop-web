@@ -13,11 +13,6 @@ async function bootstrap() {
   app.enableCors({ origin: true });
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
-  // Endpoint de statut léger (pas besoin de controller dédié)
-  const httpAdapter = app.getHttpAdapter();
-  const instance: any = httpAdapter.getInstance?.() ?? (httpAdapter as any);
-  instance.get('/status', (_req: any, res: any) => res.json({ status: 'ok' }));
-
   // Swagger (à compléter si besoin : security, servers, tags, etc.)
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Web API')
@@ -30,7 +25,7 @@ async function bootstrap() {
 
   const port = Number(process.env.WEB_API_PORT) || 13001;
   await app.listen(port);
-  logger.log(`Running on :${port} | Status: /status | Swagger: /docs`);
+  logger.log(`Running on :${port} | Status: /health | Swagger: /docs`);
 }
 
 bootstrap();

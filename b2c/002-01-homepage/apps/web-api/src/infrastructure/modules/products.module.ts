@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 
-import { ProductsController } from '../adapters/http/products.controller.js';
-import { InMemoryProductRepository, InMemoryCategoryRepository } from '../adapters/persistence/inMemory.repository.js';
+import { ProductsController } from '../adapters/http/products.controller';
+import { InMemoryProductRepository, InMemoryCategoryRepository } from '../adapters/persistence/inMemory.repository';
 import { TOKENS } from '../tokens';
-import { ListProductsUseCase } from '../../application/usecases/ListProducts.js';
-import { GetProductUseCase } from '../../application/usecases/GetProduct.js';
+import { ListProductsUseCase } from '../../application/usecases/ListProducts';
+import { GetProductUseCase } from '../../application/usecases/GetProduct';
 
 @Module({
   controllers: [ProductsController],
