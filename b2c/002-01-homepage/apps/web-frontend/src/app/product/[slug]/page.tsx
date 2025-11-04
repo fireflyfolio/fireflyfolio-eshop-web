@@ -1,7 +1,11 @@
+import { API_URL } from '@/lib/env';
+
 export default async function ProductPage({ params }: any) {
-  const res = await fetch(`${process.env.INTERNAL_WEB_API_URL}/products/${params.slug}`, { next: { revalidate: 60 } });
+  const res = await fetch(`${API_URL}/products/${params.slug}`, { next: { revalidate: 60 } });
+
   if (res.status === 404) return <div className="mx-auto max-w-7xl px-4 py-10">Produit introuvable.</div>;
   const p = await res.json();
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-6">
       <div className="grid grid-cols-12 gap-6">

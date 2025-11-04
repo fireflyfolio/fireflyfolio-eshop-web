@@ -1,5 +1,7 @@
+import { API_URL } from '@/lib/env';
+
 async function getPage() {
-  const r = await fetch(`${process.env.INTERNAL_WEB_API_URL}/pages/cookie`, { next: { revalidate: 3600 } });
+  const r = await fetch(`${API_URL}/pages/cookie`, { next: { revalidate: 3600 } });
   return r.json();
 }
 

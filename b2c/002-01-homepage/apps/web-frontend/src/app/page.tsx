@@ -1,7 +1,8 @@
+import { API_URL } from '@/lib/env';
 import { Carousel } from '../ui/Carousel';
 
 async function getCategories() {
-  const res = await fetch(`${process.env.INTERNAL_WEB_API_URL}/categories`, { next: { revalidate: 60 } });
+  const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 60 } });
   return res.json() as Promise<Array<{ slug: string; name: { fr: string; en: string }; imageUrl: string }>>;
 }
 
@@ -15,7 +16,7 @@ export default async function HomePage() {
         <h2 className="text-xl font-semibold mb-4">Catégories</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {cats.map(c => (
-            <a key={c.slug} href={`/catalogue?category=${c.slug}`} className="border rounded-lg overflow-hidden">
+            <a key={c.slug} href={`/catalog?category=${c.slug}`} className="border rounded-lg overflow-hidden">
               <img src={c.imageUrl} alt={c.name.fr} className="w-full aspect-[4/3] object-cover" />
               <div className="p-3">{c.name.fr}</div>
             </a>
