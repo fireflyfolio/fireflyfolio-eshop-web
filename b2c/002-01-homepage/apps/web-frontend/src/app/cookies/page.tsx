@@ -1,5 +1,5 @@
 async function getPage() {
-  const r = await fetch(`${process.env.PUBLIC_WEB_API_URL}/pages/privacy`, { next: { revalidate: 3600 } });
+  const r = await fetch(`${process.env.INTERNAL_WEB_API_URL}/pages/privacy`, { next: { revalidate: 3600 } });
   return r.json();
 }
 

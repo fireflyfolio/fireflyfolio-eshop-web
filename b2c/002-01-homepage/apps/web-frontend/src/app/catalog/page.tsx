@@ -1,7 +1,7 @@
 import ProductCard from '@/ui/ProductCard';
 
 async function getProducts(searchParams: Record<string, string | undefined>) {
-  const url = new URL(`${process.env.PUBLIC_WEB_API_URL}/products`);
+  const url = new URL(`${process.env.INTERNAL_WEB_API_URL}/products`);
   Object.entries(searchParams).forEach(([k, v]) => v && url.searchParams.set(k, v));
   const res = await fetch(url.toString(), { next: { revalidate: 30 } });
   return res.json() as Promise<{ items: any[]; total: number; page: number; pageSize: number }>;

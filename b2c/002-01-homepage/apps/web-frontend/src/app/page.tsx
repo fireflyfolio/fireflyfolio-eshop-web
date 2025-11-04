@@ -1,7 +1,7 @@
 import { Carousel } from '../ui/Carousel';
 
 async function getCategories() {
-  const res = await fetch(`${process.env.PUBLIC_WEB_API_URL}/categories`, { next: { revalidate: 60 } });
+  const res = await fetch(`${process.env.INTERNAL_WEB_API_URL}/categories`, { next: { revalidate: 60 } });
   return res.json() as Promise<Array<{ slug: string; name: { fr: string; en: string }; imageUrl: string }>>;
 }
 
