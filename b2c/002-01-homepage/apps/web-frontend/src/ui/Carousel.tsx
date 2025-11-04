@@ -4,7 +4,7 @@ import { useState } from 'react';
 export function Carousel({ slides }: { slides: { image: string; href: string; alt: string }[] }) {
   const [idx, setIdx] = useState(0);
   return (
-    <div className="relative" aria-roledescription="carousel" aria-label="Catégories">
+    <div className="relative z-0" aria-roledescription="carousel" aria-label="Catégories">
       {slides.length > 0 && (
         <a href={slides[idx].href}>
           <img src={slides[idx].image} alt={slides[idx].alt} className="w-full aspect-[16/6] object-cover" />

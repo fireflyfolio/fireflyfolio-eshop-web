@@ -10,8 +10,8 @@ export default function SideMenu({ open, onClose }: { open: boolean; onClose: ()
 
   return (
     <>
-      <div className={`fixed inset-0 bg-black/30 transition-opacity ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} aria-hidden={!open} onClick={onClose} />
-      <aside aria-label="Menu latéral" className={`fixed left-0 top-0 h-full w-72 bg-white shadow-xl transition-transform ${open ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed inset-0 bg-black/30 transition-opacity ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} z-40`} aria-hidden={!open} onClick={onClose} />
+      <aside aria-label="Menu latéral" className={`fixed left-0 top-0 h-full w-72 bg-white shadow-xl transition-transform ${open ? 'translate-x-0' : '-translate-x-full'} z-50`}>
         <div className="p-4 border-b flex items-center justify-between">
           <strong>Menu</strong>
           <button aria-label="Fermer" className="p-2" onClick={onClose}>✕</button>
