@@ -5,7 +5,7 @@ function toURLSearchParams(obj: Record<string, unknown>) {
   const usp = new URLSearchParams();
 
   for (const [k, v] of Object.entries(obj)) {
-    if (v == null) continue;
+    if (v == null || v == '') continue;
 
     if (Array.isArray(v)) {
       for (const item of v) usp.append(k, String(item));
@@ -21,9 +21,11 @@ async function getProducts(sp: Record<string, unknown>) {
   const url = new URL(`${API_URL}/products`);
   const usp = toURLSearchParams(sp);
 
+  console.log(usp)
+
   // Optionnel: garde seulement les clés autorisées
   const allowed = ['q','category','brand','minPrice','maxPrice','minRating','sort','page','pageSize'];
-   for (const [k,v] of usp) if (!allowed.includes(k)) usp.delete(k);
+  for (const [k,v] of usp) if (!allowed.includes(k)) usp.delete(k);
 
   url.search = usp.toString();
   const res = await fetch(url.toString(), { next: { revalidate: 30 } });
