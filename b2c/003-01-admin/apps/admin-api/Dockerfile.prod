@@ -3,7 +3,7 @@ WORKDIR /app
 
 # Dependencies
 COPY package.json package-lock.json* ./
-RUN npm ci
+RUN npm ci --no-audit --no-fund || npm i --no-audit --no-fund
 
 # Sources
 COPY tsconfig.json nest-cli.json ./

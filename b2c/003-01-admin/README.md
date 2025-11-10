@@ -1,2 +1,2 @@
-# eShop — Homepage
+# eShop — Admin
 

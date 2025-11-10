@@ -1,0 +1,70 @@
+services:
+  web-api:
+    build: ./apps/web-api
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      WEB_API_PORT: 3001
+    ports:
+      - "13001:3001"
+    networks: [eshop-net]
+
+  web-frontend:
+    build: ./apps/web-frontend
+    environment:
+      INTERNAL_WEB_API_URL: http://web-api:3001
+    ports:
+      - "13000:3000"
+    networks: [eshop-net]
+
+  admin-api:
+    build: ./apps/admin-api
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      ADMIN_API_PORT: 3001
+      REDIS_URL: ${REDIS_URL}
+    ports:
+      - "14001:3001"
+    networks: [eshop-net]
+
+  admin-frontend:
+    build: ./apps/admin-frontend
+    environment:
+      INTERNAL_ADMIN_API_URL: http://admin-api:3001
+    ports:
+      - "14000:3000"
+    networks: [eshop-net]
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks: [eshop-net]
+
+  pgadmin:
+    image: dpage/pgadmin4:8
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "${PGADMIN_PORT}:80"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    networks: [eshop-net]
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+    networks: [eshop-net]
+
+networks:
+  eshop-net:
+
+volumes:
+  pgdata:
+  pgadmin:

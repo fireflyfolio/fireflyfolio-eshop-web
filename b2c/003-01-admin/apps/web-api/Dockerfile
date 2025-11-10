@@ -11,8 +11,7 @@ COPY src ./src
 COPY prisma ./prisma
 
 # Build & Prisma
-RUN npm run build && npm run prisma:generate
+RUN npm run prisma:generate
 
 EXPOSE 3001
-ENV NODE_ENV=production
-CMD sh -c "npm run prisma:migrate && node dist/main.js"
+CMD ["npm", "run", "start:dev"]
