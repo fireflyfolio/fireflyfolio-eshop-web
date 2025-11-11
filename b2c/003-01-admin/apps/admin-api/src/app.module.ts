@@ -1,16 +1,26 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import * as Joi from 'joi';
+
+import configuration from './config/configuration';
+import { PrismaModule } from './shared/infra/prisma/prisma.module';
+import { RedisModule } from './shared/infra/redis/redis.module';
 import { StatusController } from './status.controller';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { WelcomeModule } from './welcome/welcome.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      validationSchema: Joi.object({
-        ADMIN_API_PORT: Joi.number().default(3001)
-      })
-    })
+      load: [configuration],
+      envFilePath: ['.env', '../.env', '../../.env'],
+    }),
+    PrismaModule,
+    RedisModule,
+    UsersModule,
+    AuthModule,
+    WelcomeModule,
   ],
   controllers: [StatusController]
 })
