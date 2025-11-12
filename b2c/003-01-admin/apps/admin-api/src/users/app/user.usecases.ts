@@ -10,6 +10,7 @@ export class UserUseCases {
   async validateCredentials(login: string, password: string) {
     const user = await this.users.findByLogin(login);
     if (!user) return null;
+
     const ok = await argon2.verify(user.passwordHash, password);
     return ok ? user : null;
   }

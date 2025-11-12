@@ -19,8 +19,10 @@ export class AuthService {
 
     const jti = uuid();
     const payload = { sub: user.id, login: user.login, jti, dn: user.displayName };
+
     const token = await this.jwt.signAsync(payload, { jwtid: jti });
     const decoded: any = this.jwt.decode(token);
+
     return { accessToken: token, exp: decoded?.exp, jti };
   }
 

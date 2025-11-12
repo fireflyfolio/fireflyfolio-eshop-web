@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { RedisService } from '../../shared/infra/redis/redis.service';
 import { ConfigService } from '@nestjs/config';
+
+import { RedisService } from '../../shared/infra/redis/redis.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -16,15 +17,17 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: secret, // <- garanti string
+      secretOrKey: secret,
     });
   }
 
   async validate(payload: any) {
     const jti = payload?.jti;
     if (!jti) return null;
+
     const blacklisted = await this.redis.isBlacklisted(jti);
     if (blacklisted) return null;
+
     return payload; // req.user
   }
 }
