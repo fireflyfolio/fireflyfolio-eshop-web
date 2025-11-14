@@ -43,9 +43,11 @@ main {
   background: #f6f7fb;
   display: grid;
   grid-template-rows: 56px 1fr;
+  min-width: 0;
 }
 
 .content {
   padding: 1rem;
+  min-width: 0;
 }
 </style>

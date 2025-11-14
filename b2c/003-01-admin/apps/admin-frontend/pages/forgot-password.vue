@@ -20,16 +20,19 @@ const send = () => { sent.value = true; };
 
 <style scoped>
 .auth {
-  max-width: 360px;
+  width: 100%;
+  max-width: 380px;
   margin: 10vh auto;
   background: white;
   padding: 1.25rem;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, .05)
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
 }
 
 .auth input {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin: .5rem 0;
   padding: .6rem;
   border: 1px solid #e5e7eb;

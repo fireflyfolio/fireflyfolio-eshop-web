@@ -104,4 +104,15 @@ const userName = computed(() => props.userName ?? 'User');
 .dropdown button:hover {
   background: #f3f4f6;
 }
+
+.menu summary {
+  list-style: none;
+  cursor: pointer;
+  padding: .35rem .6rem;
+  border-radius: 8px;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 </style>

@@ -114,4 +114,22 @@ nav {
   font-size: 1.1rem;
   line-height: 1;
 }
+
+.search {
+  margin-bottom: .25rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.search input {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: .5rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #222;
+  color: #eee;
+}
 </style>

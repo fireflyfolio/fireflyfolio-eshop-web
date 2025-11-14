@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   devtools: false,
   typescript: { strict: true },
   modules: ['@pinia/nuxt'],
+  css: ['@/assets/css/base.css'],
   runtimeConfig: {
     INTERNAL_ADMIN_API_URL: process.env.INTERNAL_ADMIN_API_URL || 'http://admin-api:3001'
   },

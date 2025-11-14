@@ -1,0 +1,54 @@
+/* Safer defaults */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#__nuxt {
+  height: 100%;
+}
+
+/* Inputs never overflow and can shrink in flex/grid */
+input,
+select,
+textarea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+button {
+  font: inherit;
+}
+
+/* Optional helpers */
+.form-row {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
+  min-width: 0;
+}
+
+/* Pleasant defaults */
+:root {
+  --border: #e5e7eb;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: .6rem .7rem;
+  background: #fff;
+}
