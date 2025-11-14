@@ -1,10 +1,11 @@
 <template>
   <div class="app" :style="{ gridTemplateColumns: sidebarWidth + ' 1fr' }">
-    <!-- Sidebar & Topbar are hidden until authenticated -->
-    <Sidebar v-if="isAuthenticated" :collapsed="collapsed" />
+    <Sidebar v-if="isAuthenticated" :collapsed="collapsed" @requestExpand="collapsed = false" />
+
     <main>
       <Topbar v-if="isAuthenticated" :page-title="pageTitle" :user-name="userName"
         @toggleSidebar="collapsed = !collapsed" @logout="logout" />
+
       <section class="content">
         <slot />
       </section>
@@ -18,21 +19,16 @@ import Sidebar from '@/components/Sidebar.vue';
 import Topbar from '@/components/Topbar.vue';
 import { useAuthStore } from '@/stores/auth';
 
-
 const route = useRoute();
 const store = useAuthStore();
 
-
 const collapsed = ref(false);
 const sidebarWidth = computed(() => (collapsed.value ? '64px' : '260px'));
-
 
 const pageTitle = computed(() => route.name?.toString() ?? 'Home');
 const userName = computed(() => store.user?.displayName ?? 'User');
 const logout = () => store.logout();
 
-
-// Hide chrome when not authenticated (middleware still redirects)
 const isAuthenticated = computed(() => !!store.user);
 </script>
 
