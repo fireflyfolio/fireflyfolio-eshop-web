@@ -1,12 +1,12 @@
 <template>
   <header class="topbar">
-    <button @click="$emit('toggleSidebar')" aria-label="Toggle sidebar">☰</button>
+    <button @click="$emit('toggleSidebar')" aria-label="Toggle sidebar" class="icon">☰</button>
     <span class="page">{{ pageTitle }}</span>
     <div class="spacer" />
     <button class="icon" aria-label="Notifications">🔔</button>
     <details class="menu">
       <summary>{{ userName }}</summary>
-      <ul>
+      <ul class="dropdown">
         <li>
           <NuxtLink to="/profile">Profile</NuxtLink>
         </li>
@@ -19,11 +19,13 @@
   </header>
 </template>
 
+
 <script setup lang="ts">
 const props = defineProps<{ pageTitle?: string; userName?: string }>();
 const pageTitle = computed(() => props.pageTitle ?? 'Home');
 const userName = computed(() => props.userName ?? 'User');
 </script>
+
 
 <style scoped>
 .topbar {
@@ -34,6 +36,9 @@ const userName = computed(() => props.userName ?? 'User');
   background: white;
   border-bottom: 1px solid #e5e7eb;
   height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 
 .topbar .spacer {
@@ -54,8 +59,8 @@ const userName = computed(() => props.userName ?? 'User');
 .menu summary {
   list-style: none;
   cursor: pointer;
-  padding: .25rem .5rem;
-  border-radius: 6px;
+  padding: .35rem .6rem;
+  border-radius: 8px;
 }
 
 .menu[open] summary,
@@ -63,37 +68,40 @@ const userName = computed(() => props.userName ?? 'User');
   background: #f3f4f6;
 }
 
-.menu ul {
+.dropdown {
   position: absolute;
   right: 0;
   top: 120%;
   background: white;
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: .25rem;
-  min-width: 160px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
+  min-width: 180px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .08);
+  list-style: none;
+  margin: 0;
+  z-index: 30;
 }
 
-.menu li {
+.dropdown li {
   list-style: none;
 }
 
-.menu a,
-.menu button {
+.dropdown a,
+.dropdown button {
   display: block;
   width: 100%;
   text-align: left;
-  padding: .5rem .75rem;
+  padding: .6rem .8rem;
   background: transparent;
   border: none;
   color: #111;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
-.menu a:hover,
-.menu button:hover {
+.dropdown a:hover,
+.dropdown button:hover {
   background: #f3f4f6;
 }
 </style>

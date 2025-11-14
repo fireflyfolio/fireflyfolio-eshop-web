@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({ layout: 'auth' });
 const email = ref('');
 const sent = ref(false);
 const send = () => { sent.value = true; };

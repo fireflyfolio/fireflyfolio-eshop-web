@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth';
+definePageMeta({ layout: 'auth' });
 const store = useAuthStore();
 const login = ref('test');
 const password = ref('test');

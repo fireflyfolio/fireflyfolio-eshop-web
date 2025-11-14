@@ -1,5 +1,5 @@
 <template>
-  <aside :class="['sidebar', { collapsed }]">
+  <aside :class="['sidebar', { collapsed }]" :style="{ width: width }">
     <div class="search">
       <input v-model="keyword" placeholder="Search" />
     </div>
@@ -10,24 +10,22 @@
   </aside>
 </template>
 
+
 <script setup lang="ts">
 const props = defineProps<{ collapsed?: boolean }>();
 const keyword = ref('');
 const collapsed = computed(() => !!props.collapsed);
+const width = computed(() => (collapsed.value ? '64px' : '260px'));
 </script>
+
 
 <style scoped>
 .sidebar {
-  width: 260px;
   background: #111;
   color: #eee;
   padding: 1rem;
   transition: width .2s;
   min-height: 100vh;
-}
-
-.sidebar.collapsed {
-  width: 64px;
   overflow: hidden;
 }
 
