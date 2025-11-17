@@ -1,0 +1,81 @@
+services:
+  web-api:
+    build: ./apps/web-api
+    container_name: web-api
+    ports: ["13001:8080"]
+    environment:
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on: [postgres, redis]
+    networks: [eshop-net]
+
+  web-frontend:
+    build: ./apps/web-frontend
+    container_name: web-frontend
+    ports: ["13000:8080"]
+    environment:
+      - WEB_API_URL=http://web-api:8080
+    depends_on: [web-api, redis]
+    networks: [eshop-net]
+
+  admin-api:
+    build: ./apps/admin-api
+    container_name: admin-api
+    ports: ["14001:8080"]
+    environment:
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on: [postgres, redis]
+    networks: [eshop-net]
+
+  admin-frontend:
+    build: ./apps/admin-frontend
+    container_name: admin-frontend
+    ports: ["14000:4200"]
+    environment:
+      - ADMIN_API_URL=http://admin-api:8080
+    depends_on: [admin-api]
+    networks: [eshop-net]
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/00_init.sql:ro
+    networks: [eshop-net]
+
+  pgadmin:
+    image: dpage/pgadmin4:8
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "${PGADMIN_PORT}:80"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    depends_on: [postgres]
+    networks: [eshop-net]
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+    networks: [eshop-net]
+
+networks:
+  eshop-net:
+
+volumes:
+  pgdata:
+  pgadmin:
