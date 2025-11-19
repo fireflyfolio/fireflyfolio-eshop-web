@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/eshop}
+    username: ${SPRING_DATASOURCE_USERNAME:eshop}
+    password: ${SPRING_DATASOURCE_PASSWORD:eshop}
+    driver-class-name: org.postgresql.Driver
+  redis:
+    host: ${REDIS_HOST:redis}
+    port: ${REDIS_PORT:6379}
+
+logging:
+  level:
+    root: INFO
+    com.eshop.adminapi: INFO

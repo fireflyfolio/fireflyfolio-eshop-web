@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Home</title>
+  <style>
+    :root{--bg:#0f172a;--panel:#111827;--text:#e5e7eb;--muted:#94a3b8;--accent:#3b82f6}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui;background:#0b1020;color:var(--text);display:flex;min-height:100vh}
+    /* side menu */
+    .sidebar{width:240px;background:var(--panel);transition:width .2s ease;overflow:hidden}
+    .sidebar.collapsed{width:72px}
+    .side-header{padding:1rem;border-bottom:1px solid #1f2937}
+    .side-link{display:flex;gap:.6rem;align-items:center;padding:.7rem 1rem;color:var(--text);text-decoration:none;border-radius:10px;margin:.35rem 8px}
+    .side-link:hover{background:#1f2937}
+    .icon{width:20px;height:20px;background:#374151;border-radius:6px}
+    /* main */
+    .main{flex:1;display:flex;flex-direction:column}
+    .topbar{display:flex;align-items:center;gap:1rem;padding:.8rem 1rem;background:#0b1226;border-bottom:1px solid #1f2937}
+    .title{font-weight:700}
+    .spacer{flex:1}
+    .btn{background:#1f2937;color:var(--text);border:1px solid #243041;padding:.5rem .7rem;border-radius:8px;cursor:pointer}
+    .crumbs{color:var(--muted);font-size:.9rem;margin:1rem}
+    .card{background:#0b1226;border:1px solid #1f2937;border-radius:14px;padding:1rem;margin:1rem}
+  </style>
+</head>
+<body>
+  <aside id="s" class="sidebar">
+    <div class="side-header">
+      <button class="btn" onclick="toggleSide()">☰</button>
+    </div>
+    <nav>
+      <a class="side-link" href="/"><span class="icon"></span><span class="lab">Home</span></a>
+      <a class="side-link" href="/catalog"><span class="icon"></span><span class="lab">Catalog</span></a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div class="title">eShop B2B</div>
+      <div class="spacer"></div>
+      <button class="btn">Notifications</button>
+      <button class="btn">Settings</button>
+      <form method="post" action="/logout" style="display:inline"><button class="btn">Logout</button></form>
+    </div>
+
+    <div class="crumbs">Home / Dashboard</div>
+
+    <section class="card">
+      <h2>Welcome</h2>
+      <p th:text="'Hello, ' + ${email} + ' — glad to see you!'">Hello, Guest — glad to see you!</p>
+      <p>Use the side menu to navigate. “Catalog” is a placeholder page for now.</p>
+    </section>
+  </main>
+
+<script>
+  function toggleSide(){
+    const s = document.getElementById('s');
+    s.classList.toggle('collapsed');
+    // hide labels when collapsed
+    s.querySelectorAll('.lab').forEach(l => l.style.display = s.classList.contains('collapsed') ? 'none' : 'inline');
+  }
+</script>
+</body>
+</html>

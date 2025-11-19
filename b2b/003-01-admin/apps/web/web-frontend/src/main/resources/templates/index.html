@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>B2B Web Frontend</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 2rem; }
+    button { padding: .6rem 1rem; font-size: 1rem; cursor: pointer; }
+    pre { background: #111; color: #e6e6e6; padding: 1rem; border-radius: .5rem; min-height: 2.2rem; }
+  </style>
+</head>
+<body>
+  <h1>Web Frontend (Java)</h1>
+  <p>Ce bouton appelle <code>/api/status</code> (proxifié vers la Web API).</p>
+
+  <button id="btn">Call /api/status</button>
+  <pre id="out">...</pre>
+
+  <script>
+    const out = document.getElementById('out');
+    document.getElementById('btn').onclick = async () => {
+      out.textContent = 'Loading...';
+      try {
+        const res = await fetch('/api/status');
+        out.textContent = await res.text();
+      } catch (e) {
+        out.textContent = 'Error: ' + (e?.message || e);
+      }
+    };
+  </script>
+</body>
+</html>
