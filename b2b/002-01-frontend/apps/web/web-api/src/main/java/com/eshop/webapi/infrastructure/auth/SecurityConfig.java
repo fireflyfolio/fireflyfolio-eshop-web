@@ -19,9 +19,8 @@ public class SecurityConfig {
   private final JdbcUserRepository userRepo;
 
   @Bean
-  PasswordEncoder passwordEncoder() {
-    // Supports "{bcrypt}..." hashes in DB
-    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+  public PasswordEncoder passwordEncoder() {
+    return org.springframework.security.crypto.factory.PasswordEncoderFactories.createDelegatingPasswordEncoder();
   }
 
   @Bean
@@ -35,7 +34,7 @@ public class SecurityConfig {
       .csrf(csrf -> csrf.disable())
       .authorizeHttpRequests(reg -> reg
         .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/forgot-password").permitAll()
-        .requestMatchers(HttpMethod.GET, "/status", "/auth/me").permitAll()
+        .requestMatchers(HttpMethod.GET, "/status", "/auth/me").permitAll() 
         .anyRequest().authenticated()
       )
       .httpBasic(Customizer.withDefaults())
