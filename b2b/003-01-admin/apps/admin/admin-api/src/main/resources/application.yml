@@ -6,12 +6,17 @@ spring:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/eshop}
     username: ${SPRING_DATASOURCE_USERNAME:eshop}
     password: ${SPRING_DATASOURCE_PASSWORD:eshop}
-    driver-class-name: org.postgresql.Driver
-  redis:
-    host: ${REDIS_HOST:redis}
-    port: ${REDIS_PORT:6379}
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+  session:
+    store-type: redis
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
 
 logging:
   level:
-    root: INFO
-    com.eshop.adminapi: INFO
+    org.springframework.security: INFO

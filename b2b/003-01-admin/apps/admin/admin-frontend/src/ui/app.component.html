@@ -1,0 +1,23 @@
+<div class="layout">
+  <aside class="side" [class.collapsed]="collapsed()">
+    <div class="side-header">
+      <button class="btn" (click)="toggle()">☰</button>
+      <span class="brand" *ngIf="!collapsed()">eShop B2B Admin</span>
+    </div>
+    <nav class="side-nav">
+      <a routerLink="/" routerLinkActive="active"><span class="ico"></span><span class="lab" *ngIf="!collapsed()">Home</span></a>
+      <a routerLink="/vendors" routerLinkActive="active"><span class="ico"></span><span class="lab" *ngIf="!collapsed()">Vendors</span></a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="title">Admin</div>
+      <div class="spacer"></div>
+      <button class="btn">Notifications</button>
+      <button class="btn">Settings</button>
+      <button class="btn" (click)="logout()">Logout</button>
+    </div>
+    <router-outlet/>
+  </main>
+</div>
