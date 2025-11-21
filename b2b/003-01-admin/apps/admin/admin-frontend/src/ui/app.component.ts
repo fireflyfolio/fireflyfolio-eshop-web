@@ -1,5 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../core/auth.service';
 
@@ -11,12 +11,13 @@ import { AuthService } from '../core/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  collapsed = signal(false);
-  
-  user = computed(() => this.auth.userEmail());
+  collapsed = false;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
-  toggle() { this.collapsed.update(v => !v); }
-  async logout() { await this.auth.logout(); location.href = '/login'; }
+  user()  { return this.auth.userEmail(); } // signal -> string | null
+  isAuth(){ return this.auth.isAuth(); }    // signal -> boolean
+
+  toggle(){ this.collapsed = !this.collapsed; }
+  async logout(){ await this.auth.logout(); this.router.navigateByUrl('/login'); }
 }

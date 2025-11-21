@@ -22,10 +22,10 @@ import { AuthService } from '../../core/auth.service';
     <div class="err" *ngIf="error">Invalid credentials.</div>
   </div>`,
   styles: [`
-  .card{max-width:420px;margin:10vh auto;background:#0b1226;border:1px solid #1f2937;border-radius:14px;padding:1.2rem;color:#e5e7eb}
-  input{width:100%;margin:.5rem 0;padding:.7rem .9rem;border-radius:10px;border:1px solid #243041;background:#0f172a;color:#e5e7eb}
-  button{padding:.7rem 1rem;border:0;background:#3b82f6;color:white;border-radius:10px;font-weight:600;cursor:pointer}
-  .err{color:#fca5a5;margin-top:.6rem}`]
+  .card{max-width:420px;margin:10vh auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:14px;padding:1.2rem;color:#0f172a}
+  .err{color:#b91c1c;margin-top:.6rem}
+  .ok{color:#047857;margin:.6rem 0}
+`]
 })
 export class LoginComponent {
   email = ''; password = ''; error = false;

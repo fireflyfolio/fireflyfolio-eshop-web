@@ -19,13 +19,20 @@ public class SecurityConfig {
 
   @Bean SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http
-      .csrf(csrf -> csrf.disable())
-      .authorizeHttpRequests(reg -> reg
-        .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/forgot-password").permitAll()
-        .requestMatchers(HttpMethod.GET, "/auth/me", "/status").permitAll()
-        .anyRequest().authenticated()
+      .csrf(csrf -> csrf.disable())               // 1) pas de CSRF pour nos POST JSON
+      .httpBasic(h -> h.disable())                // 2) pas de WWW-Authenticate
+      .exceptionHandling(e ->                     // 3) 401 simple au lieu de popup
+          e.authenticationEntryPoint((req,res,ex) -> res.sendError(401))
       )
-      .httpBasic(Customizer.withDefaults())
+      .authorizeHttpRequests(reg -> reg
+      // --- routes publiques ---
+      .requestMatchers(HttpMethod.GET, "/status", "/auth/me").permitAll()
+      .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/forgot-password", "/auth/logout").permitAll()
+      // si besoin: preflight
+      .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+      // --- le reste protégé ---
+      .anyRequest().authenticated()
+    )
       .build();
   }
 }

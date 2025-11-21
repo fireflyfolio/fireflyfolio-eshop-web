@@ -5,5 +5,5 @@ on conflict (email) do nothing;
 
 -- demo vendor
 insert into vendors(email, name, enabled) values
-('test@test.tv', 'Demo Vendor', true)
+('test@test', 'Demo Vendor', true)
 on conflict (email) do nothing;

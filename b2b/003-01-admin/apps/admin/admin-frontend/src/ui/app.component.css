@@ -1,31 +1,31 @@
 :root {
-  --panel: #111827;
-  --bg: #0b1020;
-  --line: #1f2937;
-  --text: #e5e7eb;
-  --muted: #94a3b8
+  --bg: #ffffff;
+  --panel: #f8fafc;
+  --line: #e5e7eb;
+  --text: #0f172a;
+  --muted: #64748b;
 }
 
 * {
   box-sizing: border-box
 }
 
-body,
-html {
+html,
+body {
   margin: 0;
   height: 100%
 }
 
 .layout {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   background: var(--bg);
   color: var(--text)
 }
 
 .side {
   width: 240px;
-  transition: width .2s ease;
+  transition: width .2s;
   background: var(--panel);
   border-right: 1px solid var(--line);
   overflow: hidden
@@ -44,7 +44,8 @@ html {
 }
 
 .brand {
-  font-weight: 700
+  font-weight: 700;
+  color: var(--text)
 }
 
 .side-nav a {
@@ -60,20 +61,21 @@ html {
 
 .side-nav a:hover,
 .side-nav a.active {
-  background: #1b2437
+  background: #eef2ff
 }
 
 .ico {
   width: 18px;
   height: 18px;
-  background: #334155;
+  background: #c7d2fe;
   border-radius: 6px
 }
 
 .main {
   flex: 1;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+  min-width: 0
 }
 
 .topbar {
@@ -81,8 +83,10 @@ html {
   align-items: center;
   gap: 1rem;
   padding: .8rem 1rem;
-  background: #0b1226;
-  border-bottom: 1px solid var(--line)
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0
 }
 
 .title {
@@ -94,10 +98,43 @@ html {
 }
 
 .btn {
-  background: #1f2937;
-  color: var(--text);
-  border: 1px solid #243041;
+  background: #eff6ff;
+  color: #1e3a8a;
+  border: 1px solid #bfdbfe;
   padding: .45rem .7rem;
   border-radius: 8px;
   cursor: pointer
+}
+
+.page {
+  padding: 1rem
+}
+
+.crumbs {
+  color: var(--muted)
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem;
+  color: var(--text)
+}
+
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: .6rem;
+  table-layout: fixed
+}
+
+.tbl th,
+.tbl td {
+  border: 1px solid var(--line);
+  padding: .6rem;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
 }
