@@ -22,5 +22,5 @@ docker run -d --name admin-api --network eshop-net -p 14001:8080 \
 # admin-frontend (Angular dev server)
 ```bash
 docker build -t admin-frontend ./admin-frontend
-docker run --rm --name admin-frontend --network eshop-net -p 14000:4200 admin-frontend
+docker run -d --name admin-frontend --network eshop-net -p 14000:4200 admin-frontend
 ```

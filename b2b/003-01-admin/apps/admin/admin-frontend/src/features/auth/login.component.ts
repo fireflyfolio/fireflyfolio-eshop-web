@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../core/auth.service';
 import { Router, RouterLink } from '@angular/router';
+
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   standalone: true,
@@ -30,7 +31,7 @@ export class LoginComponent {
   email = ''; password = ''; error = false;
 
   constructor(private auth: AuthService, private router: Router) { }
-  
+
   async submit() {
     this.error = false;
     try { await this.auth.login(this.email, this.password); this.router.navigateByUrl('/'); }

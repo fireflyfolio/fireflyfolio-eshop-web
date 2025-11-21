@@ -1,5 +1,6 @@
 import { Component, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { AuthService } from '../../core/auth.service';
 
 @Component({
@@ -14,5 +15,6 @@ import { AuthService } from '../../core/auth.service';
 })
 export class HomeComponent {
   user = computed(() => this.auth.userEmail());
+
   constructor(private auth: AuthService){}
 }

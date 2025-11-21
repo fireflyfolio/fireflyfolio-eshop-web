@@ -12,8 +12,11 @@ import { AuthService } from '../core/auth.service';
 })
 export class AppComponent {
   collapsed = signal(false);
+  
   user = computed(() => this.auth.userEmail());
+
   constructor(private auth: AuthService) {}
+
   toggle() { this.collapsed.update(v => !v); }
   async logout() { await this.auth.logout(); location.href = '/login'; }
 }
