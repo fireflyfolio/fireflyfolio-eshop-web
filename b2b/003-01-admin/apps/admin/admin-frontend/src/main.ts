@@ -5,13 +5,14 @@ import { provideAppInitializer, inject } from '@angular/core';
 
 import { routes } from './app.routes';
 import { AppComponent } from './ui/app.component';
-import { credentialsInterceptor } from './core/with-credentials.interceptor';
 import { AuthService } from './core/auth.service';
+import { credentialsInterceptor } from './core/with-credentials.interceptor';
+import { auth401Interceptor } from './core/auth-401.interceptor';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([credentialsInterceptor])),
+    provideHttpClient(withInterceptors([credentialsInterceptor, auth401Interceptor])),
 
     provideAppInitializer(() => {
       const auth = inject(AuthService);

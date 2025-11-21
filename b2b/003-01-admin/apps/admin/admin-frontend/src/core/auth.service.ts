@@ -16,6 +16,7 @@ export class AuthService {
   }
   async login(email: string, password: string) {
     await firstValueFrom(this.http.post('/api/auth/login', { email, password }));
+    await this.me();
     this.userEmail.set(email);
   }
   async logout() {
